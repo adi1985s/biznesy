@@ -22,19 +22,25 @@
         $mArray = imap_search($connection, 'ALL');
         //print_r($mArray);
         
-        $msg = imap_fetchbody($connection, 1684, 1);
-        $msg2 = imap_fetchbody($connection, 1684, 0);
-        echo htmlentities($msg). "<br />\n";
-        //echo $msg2;
+        $msgBody = imap_fetchbody($connection, 1684, 1);
+        echo htmlentities($msgBody). "<br />\n";
+        echo $msgBody;
+        
         
         $msgOverview = imap_fetch_overview($connection, 1684);
         print_r($msgOverview);
         $msgUdate = $msgOverview[0] -> udate;
         echo "$msgUdate <br />\n";
         $msgSubject = $msgOverview[0] -> subject;
-        echo quoted_printable_decode($msgSubject)."<br />\n";
+        $msgSubject = quoted_printable_decode($msgSubject); // bez znaków ==20 itp
         
-        #szukaæ po payu tylko na miejscu 10(?)
+        echo "$msgSubject <br />\n";
+        $payuPos = strpos($msgSubject, 'PayU');
+        
+        echo "$payuPos <br />\n";
+        
+        #szukac po liœcie mArray i sprawdzaæ udate
+        #szukaæ po payu tylko na miejscu 10
         
         // fetch_body i sprawdzac subject. Jak payu na jakims miejscu to ok
         // sprawdzac udate najpierw i do momentu az bedzie mniejsze to leciec po liscie i sprawdzac
