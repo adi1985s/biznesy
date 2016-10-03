@@ -39,6 +39,12 @@
         
         echo "$payuPos <br />\n";
         
+        foreach (array_reverse($mArray) as $value){
+            echo $value. "<br />\n";
+        
+        }
+        
+        
         #szukac po liœcie mArray i sprawdzaæ udate
         #szukaæ po payu tylko na miejscu 10
         
